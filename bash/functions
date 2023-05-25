@@ -1,0 +1,1 @@
+function tmuxp { tmux new -s "$1" \; split-window -h \; split-window -v \; attach; } 

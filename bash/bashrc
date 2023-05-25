@@ -1,0 +1,44 @@
+# inspired by https://github.com/daler/dotfiles
+# load the shell dotfiles
+# "trick" to find source location of bashrc
+BASHRC_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
+for file in "$BASHRC_DIR"/{path,exports,prompt,history,functions,aliases,extra}
+do
+  [ -f "$file" ] && . "$file"
+done
+unset file
+
+# exit early if not interactive
+[ -z "$PS1" ] && return
+
+# updates size of terminal after commands
+shopt -s checkwinsize
+
+# Enable some Bash 4 features when possible:
+# * `autocd`, e.g. `**/qux` will enter `./foo/bar/baz/qux`
+# * Recursive globbing, e.g. `echo **/*.txt`
+for option in autocd globstar
+do
+  shopt -s "$option" 2> /dev/null || true
+done
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix
+then
+  if [ -f /usr/share/bash-completion/bash_completion ]
+  then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]
+  then
+    . /etc/bash_completion
+  fi
+fi
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# from .profile -> is it necessary?
+# . "$HOME/.cargo/env"
+

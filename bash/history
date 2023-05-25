@@ -1,0 +1,10 @@
+# remove duplicates "globally"
+# ":ignorespace" -> ignore commands which begin with whitespace
+HISTCONTROL=erasedups
+
+# history length settings (default: 1000), "-1" -> unlimited (?)
+HISTSIZE=-1
+HISTFILESIZE=-1
+
+# append to the history file, don't overwrite it
+shopt -s histappend 

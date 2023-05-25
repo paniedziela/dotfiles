@@ -5,6 +5,9 @@
 - clean: ['~']
 
 - link:
+    ~/.bashrc: 
+      force: true
+      path: bash/bashrc
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
