@@ -10,3 +10,8 @@ My dotfiles managed by dotbot
 ```sh
 ./install && exec bash
 ```
+
+## Update dotbot submodule
+```sh
+git submodule update --remote dotbot
+```
